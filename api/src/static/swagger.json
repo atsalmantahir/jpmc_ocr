@@ -1,0 +1,67 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Document Demo API",
+    "description": "Google Cloud Document AI Document Extraction MVP",
+    "version": "1.0.0"
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "JWT Authorization header using the Bearer scheme."
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "tags": "Documents",
+    "/documents/analyze": {
+      "post": {
+        "summary": "Analyze a document using Google Document AI",
+        "description": "Uploads a document to Google Document AI and returns extracted fields.",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Document to analyze",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document analysis result",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Field Name": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "Field Value": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid file"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+flask
+flask-cors
+flask-restplus
+flask-swagger-ui
+google-cloud-documentai
+pandas
