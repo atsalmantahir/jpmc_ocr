@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { CssBaseline, Container, Typography, Box, AppBar, Toolbar, Button } from '@mui/material';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
-function App() {
+// Example Pages
+import AdminDashboard from './pages/admin/AdminDashboard';
+import UserDashboard from './pages/user/UserDashboard';
+
+// Main App layout component
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <div style={{ display: 'flex' }}>
+        {/* Sidebar */}
+        <Box
+          sx={{
+            width: 250,
+            height: '100vh',
+            backgroundColor: 'primary.main',
+            color: 'white',
+            padding: 2,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Typography variant="h5" gutterBottom>
+            Admin Panel
+          </Typography>
+          <Button component={Link} to="/admin-dashboard" color="inherit">Admin Dashboard</Button>
+          <Button component={Link} to="/user-dashboard" color="inherit">User Dashboard</Button>
+        </Box>
+
+        {/* Main content area */}
+        <Box
+          sx={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                My Application
+              </Typography>
+            </Toolbar>
+          </AppBar>
+
+          <Container sx={{ marginTop: 2 }}>
+            <Routes>
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/user-dashboard" element={<UserDashboard />} />
+            </Routes>
+          </Container>
+        </Box>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
