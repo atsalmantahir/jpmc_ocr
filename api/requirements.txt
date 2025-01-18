@@ -2,5 +2,8 @@ flask
 flask-cors
 flask-restplus
 flask-swagger-ui
+Flask-SQLAlchemy 
+Flask-Login 
+PyJWT
 google-cloud-documentai
 pandas
